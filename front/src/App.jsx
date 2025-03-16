@@ -1,25 +1,19 @@
-import { useState } from "react";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 
 function App() {
-  const [visibleSidebar, setVisibleSidebar] = useState(false);
-
-  const toggleSidebar = () => {
-    setVisibleSidebar(!visibleSidebar);
-  };
-
   return (
     <>
-      {/* <Navbar showSidebar={toggleSidebar} />
-      <Sidebar visible={visibleSidebar} closeSidebar={toggleSidebar} />
-      <section className="p-3">
-        <Home />
-      </section> */}
-
-      <Login />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
