@@ -1,0 +1,108 @@
+import { useState } from "react";
+import LabelBill from "./LabelBill";
+
+const FrameDropBills = () => {
+  const [notPaid, setNotPaid] = useState([
+    {
+      title: "Luz",
+      status: false,
+    },
+    {
+      title: "Água",
+      status: false,
+    },
+    {
+      title: "Internet",
+      status: false,
+    },
+  ]);
+  const [paid, setPaid] = useState([]);
+
+  const [draggedItem, setDraggedItem] = useState(null);
+
+  const handleDragStart = (item) => {
+    setDraggedItem(item);
+  };
+
+  const handleDrop = (list, setList, isPaid) => {
+    if (draggedItem) {
+      if (isPaid) {
+        draggedItem.status = true;
+      } else {
+        draggedItem.status = false;
+      }
+
+      setNotPaid((prev) => prev.filter((bill) => bill !== draggedItem));
+      setPaid((prev) => prev.filter((bill) => bill !== draggedItem));
+
+      setList((prev) => [...prev, draggedItem]);
+
+      setDraggedItem(null);
+    }
+  };
+
+  const handleClickToggleStatus = (setList, item) => {
+    console.log(item);
+
+    if (item.status) {
+      item.status = false;
+    } else {
+      item.status = true;
+    }
+
+    setNotPaid((prev) => prev.filter((bill) => bill !== item));
+    setPaid((prev) => prev.filter((bill) => bill !== item));
+    setList((prev) => [...prev, item]);
+  };
+
+  return (
+    <section className="grid grid-cols-1 sm:grid-cols-2 m-h-[100px]">
+      <section className="flex flex-col">
+        <h2 className="text-sm">Não pagas</h2>
+        <section
+          id="content"
+          className="bg-gray-50 p-2 rounded-2xl flex flex-wrap gap-2 min-h-[100px]"
+          onDrop={() => handleDrop(notPaid, setNotPaid, false)}
+          onDragOver={(e) => e.preventDefault()}
+        >
+          {notPaid.map((bill) => (
+            <span
+              key={bill.title}
+              draggable
+              onDragStart={() => handleDragStart(bill)}
+              onClick={() => handleClickToggleStatus(setPaid, bill)}
+              className="h-fit"
+            >
+              <LabelBill text={bill.title} status={bill.status} />
+            </span>
+          ))}
+        </section>
+      </section>
+
+      <section
+        className="flex flex-col"
+        onDrop={() => handleDrop(paid, setPaid, true)}
+        onDragOver={(e) => e.preventDefault()}
+      >
+        <h2 className="text-sm">Pagas</h2>
+        <section
+          id="content"
+          className="bg-gray-50 p-2 rounded-2xl flex flex-wrap gap-1 min-h-[100px]"
+        >
+          {paid.map((bill) => (
+            <span
+              key={bill.title}
+              draggable
+              onDragStart={() => handleDragStart(bill)}
+              onClick={() => handleClickToggleStatus(setNotPaid, bill)}
+              className="h-fit"
+            >
+              <LabelBill text={bill.title} status={bill.status} />
+            </span>
+          ))}
+        </section>
+      </section>
+    </section>
+  );
+};
+export default FrameDropBills;

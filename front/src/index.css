@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@layer base {
+  @theme {
+    --color-green-mint: #36eba6;
+    --color-sunshine: #ffcd56;
+    --color-cherry: #ff6384;
+    --color-sky: #36a2eb;
+  }
+
+  body {
+    background: #f4f2ee;
+  }
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+  }
+}
