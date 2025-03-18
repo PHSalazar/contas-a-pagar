@@ -13,7 +13,7 @@ import {
   getOverdueBills,
   getPaidBills,
   getUnpaidBills,
-} from "../utils/checkDue";
+} from "../utils/billsFilter";
 
 const Reports = () => {
   const data = [

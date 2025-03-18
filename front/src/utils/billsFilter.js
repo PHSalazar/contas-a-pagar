@@ -7,7 +7,7 @@ export const getOverdueBills = (bills) => {
   return overdueBills;
 };
 
-export const getUnpaidBills = (bills) => {
+export const getPendingBills = (bills) => {
   const unpaidBills = bills.filter((bill) => bill.completed == false);
 
   return unpaidBills;
