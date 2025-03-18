@@ -4,7 +4,7 @@ import {
   DollarSign,
   HandCoins,
   History,
-  ListPlus,
+  ListPlus as IconAddNewBill,
 } from "lucide-react";
 import Card from "../components/Card";
 import CardContainer from "../components/CardContainer";
@@ -52,7 +52,7 @@ const Home = () => {
           id="adicionar-Nova-Conta"
           className="fixed right-2 bottom-2 bg-sky rounded-full p-3 flex items-center justify-center text-white shadow-gray-500 shadow-sm"
         >
-          <ListPlus />
+          <IconAddNewBill />
         </button>
       </div>
     </>

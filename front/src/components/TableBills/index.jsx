@@ -1,28 +1,8 @@
 import { Check } from "lucide-react";
 import LabelStatus from "./LabelStatus";
 
-const TableBills = () => {
-  const data = [
-    {
-      title: "Luz",
-      dueDate: 6,
-      amount: 1998.29,
-      completed: false,
-    },
-    {
-      title: "Água",
-      dueDate: 10,
-      amount: 120.5,
-      completed: true,
-    },
-    {
-      title: "Internet",
-      dueDate: 15,
-      amount: 89.99,
-      completed: false,
-    },
-  ];
-
+const TableBills = ({ data }) => {
+  console.log(data);
   return (
     <table className="w-full text-sm font-light">
       <tr className="border-b-2 border-gray-400">

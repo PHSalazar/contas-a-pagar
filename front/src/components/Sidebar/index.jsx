@@ -1,4 +1,5 @@
 import { House, Receipt, Sheet, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ visible, closeSidebar }) => {
   return (
@@ -24,21 +25,21 @@ const Sidebar = ({ visible, closeSidebar }) => {
 
       <ul className="pt-20">
         <li className="py-4">
-          <a href="#" className="flex items-center">
+          <Link to={"/"} className="flex items-center">
             {" "}
             <House className="mr-2" size={16} /> Início
-          </a>
+          </Link>
         </li>
         <li className="py-4">
-          <a href="#" className="flex items-center">
+          <Link to={"/login"} className="flex items-center">
             {" "}
             <Receipt className="mr-2" size={16} /> Contas
-          </a>
+          </Link>
         </li>
         <li className="py-4">
-          <a href="#" className="flex items-center">
+          <Link to={"/reports"} className="flex items-center">
             <Sheet className="mr-2" size={16} /> Relatórios
-          </a>
+          </Link>
         </li>
       </ul>
     </section>
