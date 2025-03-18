@@ -2,7 +2,6 @@ import { Check } from "lucide-react";
 import LabelStatus from "./LabelStatus";
 
 const TableBills = ({ data }) => {
-  console.log(data);
   return (
     <table className="w-full text-sm font-light">
       <thead>

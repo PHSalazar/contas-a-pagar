@@ -9,7 +9,11 @@ import Card from "../components/Card";
 import CardContainer from "../components/CardContainer";
 import Navbar from "../components/Navbar";
 import TableBills from "../components/TableBills";
-import { getOverdueBills } from "../utils/checkDue";
+import {
+  getOverdueBills,
+  getPaidBills,
+  getUnpaidBills,
+} from "../utils/checkDue";
 
 const Reports = () => {
   const data = [
@@ -28,6 +32,12 @@ const Reports = () => {
     {
       title: "Internet",
       dueDate: 15,
+      amount: 89.99,
+      completed: false,
+    },
+    {
+      title: "Internet",
+      dueDate: 20,
       amount: 89.99,
       completed: false,
     },
@@ -55,11 +65,11 @@ const Reports = () => {
 
         <section>
           <CardContainer title="Todas as contas do mês PENDENTES">
-            {/* <TableBills filter={(bill) => bill.completed === false} /> */}
+            <TableBills data={getUnpaidBills(data)} />
           </CardContainer>
 
           <CardContainer title="Todas as contas do mês PAGAS">
-            {/* <TableBills filter={(bill) => bill.completed === true} /> */}
+            <TableBills data={getPaidBills(data)} />
           </CardContainer>
 
           <CardContainer title="Todas as contas do mês VENCIDAS">
