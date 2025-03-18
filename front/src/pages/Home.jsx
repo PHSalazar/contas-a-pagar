@@ -14,6 +14,27 @@ import FrameDropBills from "../components/FrameDropBills";
 import Navbar from "../components/Navbar";
 
 const Home = () => {
+  const data = [
+    {
+      title: "Luz",
+      dueDate: 6,
+      amount: 1998.29,
+      completed: false,
+    },
+    {
+      title: "Água",
+      dueDate: 10,
+      amount: 120.5,
+      completed: true,
+    },
+    {
+      title: "Internet",
+      dueDate: 15,
+      amount: 89.99,
+      completed: false,
+    },
+  ];
+
   return (
     <>
       <Navbar />
@@ -44,7 +65,7 @@ const Home = () => {
 
         <section>
           <CardContainer title="Todas as contas do mês">
-            <TableBills />
+            <TableBills data={data} />
           </CardContainer>
         </section>
 
