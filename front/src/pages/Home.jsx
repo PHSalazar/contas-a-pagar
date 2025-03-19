@@ -12,28 +12,24 @@ import DoughnutChart from "../components/Charts/DoughnutChart";
 import TableBills from "../components/TableBills";
 import FrameDropBills from "../components/FrameDropBills";
 import Navbar from "../components/Navbar";
+import { getAllBills, sortBills } from "../utils/billsHelpers";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Home = () => {
-  const data = [
-    {
-      title: "Luz",
-      dueDate: 6,
-      amount: 1998.29,
-      completed: false,
-    },
-    {
-      title: "Água",
-      dueDate: 10,
-      amount: 120.5,
-      completed: true,
-    },
-    {
-      title: "Internet",
-      dueDate: 15,
-      amount: 89.99,
-      completed: false,
-    },
-  ];
+  const [bills, setBills] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://localhost:7202/api/Bill")
+      .then((response) => {
+        setBills(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("Erro ao buscar contas.", error);
+      });
+  }, []);
 
   return (
     <>
@@ -65,7 +61,25 @@ const Home = () => {
 
         <section>
           <CardContainer title="Todas as contas do mês">
-            <TableBills data={data} />
+            <section className="text-xs flex flex-row gap-2 items-center justify-end p-3">
+              Classificar por:
+              <select
+                name="select-sort-bills"
+                id="select-sort-bills"
+                className="border-1 border-gray-300"
+              >
+                <option value="">Nome da Conta</option>
+                <option value="">Vencimento</option>
+                <option value="">Valor</option>
+                <option value="">Status</option>
+              </select>
+            </section>
+            <TableBills
+              data={sortBills(
+                bills,
+                (value1, value2) => value1.completed - value2.completed
+              )}
+            />
           </CardContainer>
         </section>
 

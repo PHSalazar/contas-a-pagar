@@ -10,38 +10,15 @@ import CardContainer from "../components/CardContainer";
 import Navbar from "../components/Navbar";
 import TableBills from "../components/TableBills";
 import {
+  getAllBills,
   getOverdueBills,
   getPaidBills,
-  getUnpaidBills,
-} from "../utils/billsFilter";
+  getPendingBills,
+} from "../utils/billsHelpers";
+import { useState } from "react";
 
 const Reports = () => {
-  const data = [
-    {
-      title: "Luz",
-      dueDate: 6,
-      amount: 1998.29,
-      completed: false,
-    },
-    {
-      title: "Água",
-      dueDate: 10,
-      amount: 120.5,
-      completed: true,
-    },
-    {
-      title: "Internet",
-      dueDate: 15,
-      amount: 89.99,
-      completed: false,
-    },
-    {
-      title: "Internet",
-      dueDate: 20,
-      amount: 89.99,
-      completed: false,
-    },
-  ];
+  const [dataBills, setDataBills] = useState(getAllBills());
 
   return (
     <>
@@ -65,15 +42,15 @@ const Reports = () => {
 
         <section>
           <CardContainer title="Todas as contas do mês PENDENTES">
-            <TableBills data={getUnpaidBills(data)} />
+            <TableBills data={getPendingBills(dataBills)} />
           </CardContainer>
 
           <CardContainer title="Todas as contas do mês PAGAS">
-            <TableBills data={getPaidBills(data)} />
+            <TableBills data={getPaidBills(dataBills)} />
           </CardContainer>
 
           <CardContainer title="Todas as contas do mês VENCIDAS">
-            <TableBills data={getOverdueBills(data)} />
+            <TableBills data={getOverdueBills(dataBills)} />
           </CardContainer>
         </section>
 

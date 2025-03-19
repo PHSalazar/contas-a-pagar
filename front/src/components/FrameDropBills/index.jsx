@@ -61,7 +61,7 @@ const FrameDropBills = () => {
         <h2 className="text-sm">Não pagas</h2>
         <section
           id="content"
-          className="bg-gray-50 p-2 rounded-2xl flex flex-wrap gap-2 min-h-[100px]"
+          className="bg-gray-50 p-2 m-2 rounded-2xl flex flex-wrap gap-2 min-h-[100px] border-1 border-cherry"
           onDrop={() => handleDrop(notPaid, setNotPaid, false)}
           onDragOver={(e) => e.preventDefault()}
         >
@@ -87,7 +87,7 @@ const FrameDropBills = () => {
         <h2 className="text-sm">Pagas</h2>
         <section
           id="content"
-          className="bg-gray-50 p-2 rounded-2xl flex flex-wrap gap-1 min-h-[100px]"
+          className="bg-gray-50 p-2 m-2 rounded-2xl flex flex-wrap gap-1 min-h-[100px] border-1 border-green-mint"
         >
           {paid.map((bill) => (
             <span
