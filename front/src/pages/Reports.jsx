@@ -10,6 +10,7 @@ import CardContainer from "../components/CardContainer";
 import Navbar from "../components/Navbar";
 import TableBills from "../components/TableBills";
 import useBills from "../hooks/useBills";
+import { getLateBills } from "../utils/billsHelpers";
 
 const Reports = () => {
   const { bills } = useBills();
@@ -36,7 +37,7 @@ const Reports = () => {
 
         <section>
           <CardContainer title="Todas as contas do mês PENDENTES">
-            <TableBills data={bills} />
+            <TableBills data={() => getLateBills(bills)} />
           </CardContainer>
 
           <CardContainer title="Todas as contas do mês PAGAS">

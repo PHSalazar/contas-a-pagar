@@ -1,8 +1,18 @@
-const LabelBill = ({ text, status }) => {
-  const bgStatus = status == true ? "bg-green-mint" : "bg-gray-200";
+const LabelBill = ({ text, completed, dueDate }) => {
+  let bgStatus;
+
+  if (completed === true) {
+    bgStatus = "bg-green-mint";
+  } else if (parseInt(dueDate) < new Date().getDate()) {
+    bgStatus = "bg-cherry";
+  } else if (parseInt(dueDate) > new Date().getDate()) {
+    bgStatus = "bg-sky text-white";
+  }
+
+  console.log(completed);
   return (
     <span
-      className={`relative p-1.5 rounded-full text-xs cursor-grab ${bgStatus}`}
+      className={`relative p-1.5 rounded-full text-xs cursor-grab font-semibold ${bgStatus}`}
     >
       {text}
     </span>

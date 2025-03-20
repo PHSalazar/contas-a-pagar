@@ -60,7 +60,8 @@ export const completeBill = async (idBill) => {
   }
 };
 
-export const getOverdueBills = (bills) => {
+export const getLateBills = (bills) => {
+  console.log(bills);
   const unpaidBills = bills.filter((bill) => bill.completed !== true);
   const overdueBills = unpaidBills.filter(
     (bill) => parseInt(bill.dueDate) < new Date().getDate()

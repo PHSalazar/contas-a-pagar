@@ -8,20 +8,6 @@ import {
 import useBills from "../../hooks/useBills";
 
 const FrameDropBills = () => {
-  // const [notPaid, setNotPaid] = useState([
-  //   {
-  //     title: "Luz",
-  //     status: false,
-  //   },
-  //   {
-  //     title: "Água",
-  //     status: false,
-  //   },
-  //   {
-  //     title: "Internet",
-  //     status: false,
-  //   },
-  // ]);
   const { bills } = useBills();
   const [notPaid, setNotPaid] = useState([]);
   const [paid, setPaid] = useState([]);
@@ -58,8 +44,6 @@ const FrameDropBills = () => {
   };
 
   const handleClickToggleStatus = (setList, item) => {
-    console.log(item);
-
     if (item.status) {
       item.status = false;
     } else {
@@ -89,7 +73,11 @@ const FrameDropBills = () => {
               onClick={() => handleClickToggleStatus(setPaid, bill)}
               className="h-fit"
             >
-              <LabelBill text={bill.title} status={bill.status} />
+              <LabelBill
+                text={bill.title}
+                status={bill.status}
+                dueDate={bill.duedate}
+              />
             </span>
           ))}
         </section>
@@ -113,7 +101,11 @@ const FrameDropBills = () => {
               onClick={() => handleClickToggleStatus(setNotPaid, bill)}
               className="h-fit"
             >
-              <LabelBill text={bill.title} status={bill.status} />
+              <LabelBill
+                text={bill.title}
+                completed={bill.completed}
+                dueDate={bill.duedate}
+              />
             </span>
           ))}
         </section>
