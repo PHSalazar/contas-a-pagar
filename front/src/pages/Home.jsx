@@ -6,30 +6,46 @@ import {
   History,
   ListPlus as IconAddNewBill,
 } from "lucide-react";
+import { useState } from "react";
+import { Bounce, toast } from "react-toastify";
 import Card from "../components/Card";
 import CardContainer from "../components/CardContainer";
 import DoughnutChart from "../components/Charts/DoughnutChart";
-import TableBills from "../components/TableBills";
 import FrameDropBills from "../components/FrameDropBills";
+import ModalAddBill from "../components/ModalAddBill";
 import Navbar from "../components/Navbar";
-import { getAllBills, sortBills } from "../utils/billsHelpers";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import TableBills from "../components/TableBills";
 
 const Home = () => {
-  const [bills, setBills] = useState([]);
+  const [visibleModalAddBill, setVisibleModalAddBill] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get("https://localhost:7202/api/Bill")
-      .then((response) => {
-        setBills(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log("Erro ao buscar contas.", error);
-      });
-  }, []);
+  const handleReturnAddedBillWithSuccess = (returnCode, returnMessage) => {
+    setVisibleModalAddBill(false);
+
+    returnCode === 201
+      ? toast.success(returnMessage, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        })
+      : toast.error(returnMessage, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+  };
 
   return (
     <>
@@ -74,22 +90,26 @@ const Home = () => {
                 <option value="">Status</option>
               </select>
             </section>
-            <TableBills
-              data={sortBills(
-                bills,
-                (value1, value2) => value1.completed - value2.completed
-              )}
-            />
+
+            <TableBills />
           </CardContainer>
         </section>
 
         <button
           id="adicionar-Nova-Conta"
           className="fixed right-2 bottom-2 bg-sky rounded-full p-3 flex items-center justify-center text-white shadow-gray-500 shadow-sm"
+          onClick={() => setVisibleModalAddBill(true)}
         >
           <IconAddNewBill />
         </button>
       </div>
+      {visibleModalAddBill && (
+        <ModalAddBill
+          onClose={(returnCode, messageOnClose) =>
+            handleReturnAddedBillWithSuccess(returnCode, messageOnClose)
+          }
+        />
+      )}
     </>
   );
 };

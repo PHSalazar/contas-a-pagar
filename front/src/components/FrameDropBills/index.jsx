@@ -1,22 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LabelBill from "./LabelBill";
+import {
+  fetchBills,
+  getPaidBills,
+  getPendingBills,
+} from "../../utils/billsHelpers";
+import useBills from "../../hooks/useBills";
 
 const FrameDropBills = () => {
-  const [notPaid, setNotPaid] = useState([
-    {
-      title: "Luz",
-      status: false,
-    },
-    {
-      title: "Água",
-      status: false,
-    },
-    {
-      title: "Internet",
-      status: false,
-    },
-  ]);
+  // const [notPaid, setNotPaid] = useState([
+  //   {
+  //     title: "Luz",
+  //     status: false,
+  //   },
+  //   {
+  //     title: "Água",
+  //     status: false,
+  //   },
+  //   {
+  //     title: "Internet",
+  //     status: false,
+  //   },
+  // ]);
+  const { bills } = useBills();
+  const [notPaid, setNotPaid] = useState([]);
   const [paid, setPaid] = useState([]);
+
+  useEffect(() => {
+    const pedingBills = getPendingBills(bills);
+    setNotPaid(pedingBills);
+
+    const paidBills = getPaidBills(bills);
+    setPaid(paidBills);
+  }, [bills]);
 
   const [draggedItem, setDraggedItem] = useState(null);
 

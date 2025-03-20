@@ -4,6 +4,7 @@ import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Reports from "./pages/Reports";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+
+      <ToastContainer />
     </>
   );
 }

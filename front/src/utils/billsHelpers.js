@@ -1,44 +1,63 @@
-export const getAllBills = () => {
-  const data = [
-    {
-      title: "Luz",
-      dueDate: 6,
-      amount: 1998.29,
-      completed: false,
-    },
-    {
-      title: "Água",
-      dueDate: 10,
-      amount: 120.5,
-      completed: true,
-    },
-    {
-      title: "Internet",
-      dueDate: 15,
-      amount: 89.99,
-      completed: false,
-    },
-    {
-      title: "Internet",
-      dueDate: 31,
-      amount: 89.99,
-      completed: false,
-    },
-    {
-      title: "Internet",
-      dueDate: 23,
-      amount: 89.99,
-      completed: true,
-    },
-    {
-      title: "Internet",
-      dueDate: 29,
-      amount: 89.99,
-      completed: false,
-    },
-  ];
+import axios from "axios";
 
-  return data;
+export const fetchBills = async () => {
+  try {
+    const response = await axios.get("https://127.0.0.1:7202/api/Bills", {
+      params: { userId: 0 },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log("Erro ao obter as contas do usuário.", error);
+  }
+};
+
+export const createNewBill = async (title, duedate, amount) => {
+  const newBill = {
+    id: 0,
+    idUser: 0,
+    title,
+    duedate,
+    amount,
+    status: false,
+  };
+
+  try {
+    const response = await axios.post(
+      "https://127.0.0.1:7202/api/Bills",
+      newBill
+    );
+    return response;
+  } catch (error) {
+    console.log("Erro ao criar nova conta.", error);
+    return error;
+  }
+};
+
+export const deleteBill = async (idUser, idBill) => {
+  try {
+    idUser = 0;
+
+    const response = await axios.delete(
+      `https://127.0.0.1:7202/api/Bills/${idUser}/${idBill}`
+    );
+
+    return response;
+  } catch (error) {
+    console.log("Erro ao remover conta com ID " + idBill, error);
+  }
+};
+
+export const completeBill = async (idBill) => {
+  try {
+    const response = await axios.put(
+      `https://127.0.0.1:7202/api/Bills/${idBill}`
+    );
+
+    return response;
+  } catch (error) {
+    console.log("Erro ao pagar conta com ID " + idBill, error);
+  }
 };
 
 export const getOverdueBills = (bills) => {

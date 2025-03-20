@@ -9,16 +9,10 @@ import Card from "../components/Card";
 import CardContainer from "../components/CardContainer";
 import Navbar from "../components/Navbar";
 import TableBills from "../components/TableBills";
-import {
-  getAllBills,
-  getOverdueBills,
-  getPaidBills,
-  getPendingBills,
-} from "../utils/billsHelpers";
-import { useState } from "react";
+import useBills from "../hooks/useBills";
 
 const Reports = () => {
-  const [dataBills, setDataBills] = useState(getAllBills());
+  const { bills } = useBills();
 
   return (
     <>
@@ -42,15 +36,15 @@ const Reports = () => {
 
         <section>
           <CardContainer title="Todas as contas do mês PENDENTES">
-            <TableBills data={getPendingBills(dataBills)} />
+            <TableBills data={bills} />
           </CardContainer>
 
           <CardContainer title="Todas as contas do mês PAGAS">
-            <TableBills data={getPaidBills(dataBills)} />
+            <TableBills data={bills} />
           </CardContainer>
 
           <CardContainer title="Todas as contas do mês VENCIDAS">
-            <TableBills data={getOverdueBills(dataBills)} />
+            <TableBills data={bills} />
           </CardContainer>
         </section>
 
