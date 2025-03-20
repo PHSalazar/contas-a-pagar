@@ -9,7 +9,6 @@ const LabelBill = ({ text, completed, dueDate }) => {
     bgStatus = "bg-sky text-white";
   }
 
-  console.log(completed);
   return (
     <span
       className={`relative p-1.5 rounded-full text-xs cursor-grab font-semibold ${bgStatus}`}

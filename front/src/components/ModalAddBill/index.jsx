@@ -26,7 +26,7 @@ const ModalAddNewBill = ({ onClose }) => {
   };
 
   return (
-    <section className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center bg-gray-900/85">
+    <section className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center bg-gray-900/85 z-20">
       <section id="wrapper" className="bg-white h-[400px] w-[350px]">
         <h1 className="p-10 text-center">Nova Conta</h1>
 
@@ -66,6 +66,14 @@ const ModalAddNewBill = ({ onClose }) => {
           >
             <Plus size={14} />
             Criar
+          </button>
+
+          <button
+            type="submit"
+            className="w-3/4 justify-center mx-auto text-xs items-center p-2  hover:text-orange-600"
+            onClick={() => onClose()}
+          >
+            Cancelar
           </button>
         </form>
       </section>
