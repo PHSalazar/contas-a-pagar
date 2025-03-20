@@ -3,7 +3,7 @@ import useBills from "../../hooks/useBills";
 import LabelStatus from "./LabelStatus";
 
 const TableBills = () => {
-  const { bills, handleDeleteBill, handleToggleBill } = useBills();
+  const { bills, handleDeleteBill, handleToggleStatusBill } = useBills();
   const data = bills || [];
 
   return (
@@ -30,7 +30,7 @@ const TableBills = () => {
             <td className="text-sm text-center">
               <button
                 className="text-green-600 cursor-pointer"
-                onClick={() => handleToggleBill(id)}
+                onClick={() => handleToggleStatusBill(id)}
               >
                 <Check size={16} />
               </button>

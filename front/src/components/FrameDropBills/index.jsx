@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-import LabelBill from "./LabelBill";
-import {
-  fetchBills,
-  getPaidBills,
-  getPendingBills,
-} from "../../utils/billsHelpers";
 import useBills from "../../hooks/useBills";
+import { getPaidBills, getPendingBills } from "../../utils/billsHelpers";
+import LabelBill from "./LabelBill";
 
 const FrameDropBills = () => {
   const { bills, handleToggleStatusBill } = useBills();
