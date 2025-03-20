@@ -1,5 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { completeBill, deleteBill, fetchBills } from "../utils/billsHelpers";
+import {
+  toggleStatusBill,
+  deleteBill,
+  fetchBills,
+} from "../utils/billsHelpers";
 
 export const BillsContext = createContext();
 
@@ -24,8 +28,8 @@ export const BillsProvider = ({ children }) => {
     }
   };
 
-  const handleCompleteBill = async (idBill) => {
-    const response = await completeBill(idBill);
+  const handleToggleStatusBill = async (idBill) => {
+    const response = await toggleStatusBill(idBill);
 
     if (response) {
       const data = await fetchBills();
@@ -40,7 +44,7 @@ export const BillsProvider = ({ children }) => {
         setBills,
         getBills,
         handleDeleteBill,
-        handleCompleteBill,
+        handleToggleStatusBill,
       }}
     >
       {children}

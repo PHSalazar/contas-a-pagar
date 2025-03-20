@@ -37,11 +37,11 @@ namespace api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> CompleteBill(int id)
+        public async Task<IActionResult> toggleStatus(int id)
         {
             try
             {
-                var updatedBill = await _billService.CompleteBillAsync(id);
+                var updatedBill = await _billService.ToggleStatusBillAsync(id);
                 return Ok(updatedBill);
             }
             catch (ArgumentNullException ex)

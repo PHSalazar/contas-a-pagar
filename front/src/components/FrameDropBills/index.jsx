@@ -8,7 +8,7 @@ import {
 import useBills from "../../hooks/useBills";
 
 const FrameDropBills = () => {
-  const { bills } = useBills();
+  const { bills, handleToggleStatusBill } = useBills();
   const [notPaid, setNotPaid] = useState([]);
   const [paid, setPaid] = useState([]);
 
@@ -33,6 +33,7 @@ const FrameDropBills = () => {
       } else {
         draggedItem.status = false;
       }
+      handleToggleStatusBill(draggedItem.id);
 
       setNotPaid((prev) => prev.filter((bill) => bill !== draggedItem));
       setPaid((prev) => prev.filter((bill) => bill !== draggedItem));

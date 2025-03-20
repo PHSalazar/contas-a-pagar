@@ -48,7 +48,7 @@ export const deleteBill = async (idUser, idBill) => {
   }
 };
 
-export const completeBill = async (idBill) => {
+export const toggleStatusBill = async (idBill) => {
   try {
     const response = await axios.put(
       `https://127.0.0.1:7202/api/Bills/${idBill}`

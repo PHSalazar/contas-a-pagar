@@ -28,7 +28,7 @@ namespace api.Services
             _billRepository.Delete(idUsuario, id);
         }
 
-        public async Task<BillModel> CompleteBillAsync(int id)
+        public async Task<BillModel> ToggleStatusBillAsync(int id)
         {
             var bill = await _billRepository.GetBillByIdAsync(id);
             if (bill == null)
@@ -36,7 +36,7 @@ namespace api.Services
                 throw new ArgumentNullException($"Conta com ID {id} não encontrada.");
             }
 
-            bill.Completed = true;
+            bill.Completed = !bill.Completed;
             _billRepository.UpdateBill(bill);
             await _billRepository.SaveAsync();
 
