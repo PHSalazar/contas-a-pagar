@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const fetchBills = async () => {
   try {
-    const response = await axios.get("https://127.0.0.1:7202/api/Bills", {
+    const response = await axios.get("https://localhost:7202/api/Bills", {
       params: { userId: 0 },
     });
 
@@ -24,7 +24,7 @@ export const createNewBill = async (title, duedate, amount) => {
 
   try {
     const response = await axios.post(
-      "https://127.0.0.1:7202/api/Bills",
+      "https://localhost:7202/api/Bills",
       newBill
     );
     return response;
@@ -39,7 +39,7 @@ export const deleteBill = async (idUser, idBill) => {
     idUser = 0;
 
     const response = await axios.delete(
-      `https://127.0.0.1:7202/api/Bills/${idUser}/${idBill}`
+      `https://localhost:7202/api/Bills/${idUser}/${idBill}`
     );
 
     return response;
@@ -51,7 +51,7 @@ export const deleteBill = async (idUser, idBill) => {
 export const toggleStatusBill = async (idBill) => {
   try {
     const response = await axios.put(
-      `https://127.0.0.1:7202/api/Bills/${idBill}`
+      `https://localhost:7202/api/Bills/${idBill}`
     );
 
     return response;
